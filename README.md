@@ -11,7 +11,7 @@ Filemanager is an application you can install on your server to manage files in 
 
 ## Overview
 
-![Img1](./assets/img1.png)
-![Img2](./assets/img2.png)
-![Img3](./assets/img3.png)
-![Img4](./assets/img4.png)
+![Img1](./assets/img1.jpeg)
+![Img2](./assets/img2.jpeg)
+![Img3](./assets/img3.jpeg)
+![Img4](./assets/img4.jpeg)
