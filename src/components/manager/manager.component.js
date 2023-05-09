@@ -103,8 +103,8 @@ function Manager({ path }) {
         }}
       >
         <Box>
-          {menu.map((mnu) => (
-            <Tooltip title={mnu.help}>
+          {menu.map((mnu, index) => (
+            <Tooltip key={`mnu-${index}`} title={mnu.help}>
               <IconButton onClick={mnu.onClick}>{mnu.icon}</IconButton>
             </Tooltip>
           ))}
@@ -145,7 +145,10 @@ function Manager({ path }) {
         {/* <Divider /> */}
         {tree.children.map((item) => {
           return (
-            <ListItemButton onClick={() => router.push(item.path)}>
+            <ListItemButton
+              key={`Item${item.name}`}
+              onClick={() => router.push(item.path)}
+            >
               <ListItemIcon>
                 {item.type === "directory" ? (
                   <Folder sx={{ color: colors.amber[500] }} />
