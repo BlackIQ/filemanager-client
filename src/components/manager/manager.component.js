@@ -14,9 +14,16 @@ import {
   IconButton,
   TextField,
   Typography,
+  Button,
+  Tooltip,
 } from "@mui/material";
 
-import { Folder, InsertDriveFile, CloudUpload } from "@mui/icons-material";
+import {
+  Folder,
+  InsertDriveFile,
+  CloudUpload,
+  Home,
+} from "@mui/icons-material";
 
 import { useState, useEffect } from "react";
 
@@ -51,8 +58,42 @@ function Manager({ path }) {
     total["files"] = tree.children.filter(({ type }) => type === "file").length;
   }
 
+  const menu = [
+    {
+      icon: <Home color="success" />,
+      help: "Go to home!",
+      onClick: () => router.push(source.home),
+    },
+    {
+      icon: <CloudUpload color="primary" />,
+      help: "Upload a new file",
+      onClick: () => console.log("Will be add!"),
+    },
+  ];
+
   return source !== null ? (
     <Box>
+      <head>
+        <title>{tree.name}</title>
+      </head>
+      <Box>
+        You are at:{" "}
+        {source.path.split("/").map((item, index) => (
+          <Button
+            key={`${item}-${index}`}
+            onClick={() => {
+              const url = `/${source.path
+                .split("/")
+                .slice(1, index + 1)
+                .join("/")}`;
+
+              router.push(url);
+            }}
+          >
+            {index === 0 ? "/" : item}
+          </Button>
+        ))}
+      </Box>
       <Box
         sx={{
           pb: 1,
@@ -62,9 +103,11 @@ function Manager({ path }) {
         }}
       >
         <Box>
-          <IconButton size="large">
-            <CloudUpload color="primary" />
-          </IconButton>
+          {menu.map((mnu) => (
+            <Tooltip title={mnu.help}>
+              <IconButton onClick={mnu.onClick}>{mnu.icon}</IconButton>
+            </Tooltip>
+          ))}
         </Box>
         <TextField
           variant="outlined"
@@ -74,6 +117,7 @@ function Manager({ path }) {
           type="search"
           onChange={(e) => {
             setTree({
+              ...source,
               children: source.children.filter((item) =>
                 item.name.includes(e.target.value)
               ),
@@ -81,7 +125,7 @@ function Manager({ path }) {
           }}
         />
       </Box>
-
+      <Divider />
       <List disablePadding>
         <ListItemButton
           onClick={() =>
@@ -98,7 +142,7 @@ function Manager({ path }) {
           </ListItemIcon>
           <ListItemText primary="../" />
         </ListItemButton>
-        <Divider />
+        {/* <Divider /> */}
         {tree.children.map((item) => {
           return (
             <ListItemButton onClick={() => router.push(item.path)}>
