@@ -22,6 +22,7 @@ import {
   Folder,
   InsertDriveFile,
   CloudUpload,
+  CloudDownload,
   Home,
 } from "@mui/icons-material";
 
@@ -147,7 +148,11 @@ function Manager({ path }) {
           return (
             <ListItemButton
               key={`Item${item.name}`}
-              onClick={() => router.push(item.path)}
+              onClick={() =>
+                item.type === "directory"
+                  ? router.push(item.path)
+                  : alert("Files are not supported. Soon will be add!")
+              }
             >
               <ListItemIcon>
                 {item.type === "directory" ? (
