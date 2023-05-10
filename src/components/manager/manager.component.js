@@ -82,6 +82,7 @@ function Manager({ path }) {
         {source.path.split("/").map((item, index) => (
           <Button
             key={`${item}-${index}`}
+            sx={{ textTransform: "none" }}
             onClick={() => {
               const url = `/${source.path
                 .split("/")
@@ -129,7 +130,7 @@ function Manager({ path }) {
       <Divider />
       <List disablePadding>
         <ListItemButton
-          onDoubleClick={() =>
+          onClickClick={() =>
             router.push(
               `/${path
                 .split("/")
@@ -143,12 +144,11 @@ function Manager({ path }) {
           </ListItemIcon>
           <ListItemText primary="../" />
         </ListItemButton>
-        {/* <Divider /> */}
         {tree.children.map((item) => {
           return (
             <ListItemButton
               key={`Item${item.name}`}
-              onDoubleClick={() =>
+              onClickClick={() =>
                 item.type === "directory"
                   ? router.push(item.path)
                   : alert("Files are not supported. Soon will be add!")
