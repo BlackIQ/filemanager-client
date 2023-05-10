@@ -51,7 +51,7 @@ function Manager({ path }) {
 
   const total = {};
 
-  if (source) {
+  if (tree) {
     total["directories"] = tree.children.filter(
       ({ type }) => type === "directory"
     ).length;
@@ -75,7 +75,7 @@ function Manager({ path }) {
   return source !== null ? (
     <Box>
       <head>
-        <title>{tree.name}</title>
+        <title>{tree.path}</title>
       </head>
       <Box>
         You are at:{" "}
@@ -129,7 +129,7 @@ function Manager({ path }) {
       <Divider />
       <List disablePadding>
         <ListItemButton
-          onClick={() =>
+          onDoubleClick={() =>
             router.push(
               `/${path
                 .split("/")
@@ -148,7 +148,7 @@ function Manager({ path }) {
           return (
             <ListItemButton
               key={`Item${item.name}`}
-              onClick={() =>
+              onDoubleClick={() =>
                 item.type === "directory"
                   ? router.push(item.path)
                   : alert("Files are not supported. Soon will be add!")
