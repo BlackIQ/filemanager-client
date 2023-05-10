@@ -130,7 +130,7 @@ function Manager({ path }) {
       <Divider />
       <List disablePadding>
         <ListItemButton
-          onClickClick={() =>
+          onClick={() =>
             router.push(
               `/${path
                 .split("/")
@@ -148,7 +148,7 @@ function Manager({ path }) {
           return (
             <ListItemButton
               key={`Item${item.name}`}
-              onClickClick={() =>
+              onClick={() =>
                 item.type === "directory"
                   ? router.push(item.path)
                   : alert("Files are not supported. Soon will be add!")
